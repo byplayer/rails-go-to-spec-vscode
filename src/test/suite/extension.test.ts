@@ -202,6 +202,7 @@ suite("Extension Test Suite", () => {
 			"/lib/something/foo.rb",
 			[
 				"/spec/lib/something/foo_spec.rb",
+				"/spec/foo_spec.rb",
 			]
 		);
 

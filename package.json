@@ -1,12 +1,12 @@
 {
-  "name": "rails-go-to-spec-extension-v3",
-  "displayName": "Rails Go to Spec V3",
+  "name": "rails-go-to-spec-extension-vg",
+  "displayName": "Rails Go to Spec VG",
   "description": "Switch between code and spec in Rails",
-  "version": "1.0.2",
-  "publisher": "alekhan",
-  "repository": "https://github.com/elramirezv/rails-go-to-spec-vscode",
+  "version": "1.0.3",
+  "publisher": "byplayer",
+  "repository": "https://github.com/byplayer/rails-go-to-spec-vscode",
   "engines": {
-    "vscode": "^1.75.0"
+    "vscode": "^1.95.0"
   },
   "categories": [
     "Other"
@@ -15,13 +15,13 @@
   "contributes": {
     "commands": [
       {
-        "command": "rails-go-to-spec-v3.railsGoToSpec",
+        "command": "rails-go-to-spec-vg.railsGoToSpec",
         "title": "Rails Go to Spec"
       }
     ],
     "keybindings": [
       {
-        "command": "rails-go-to-spec-v3.railsGoToSpec",
+        "command": "rails-go-to-spec-vg.railsGoToSpec",
         "key": "ctrl+shift+y",
         "mac": "cmd+shift+y",
         "when": "editorTextFocus"
@@ -31,7 +31,7 @@
       "editor/context": [
         {
           "when": "resourceLangId == ruby",
-          "command": "rails-go-to-spec-v3.railsGoToSpec",
+          "command": "rails-go-to-spec-vg.railsGoToSpec",
           "group": "railsgotospec"
         }
       ]
@@ -49,10 +49,11 @@
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
-    "@types/vscode": "^1.75.0",
+    "@types/vscode": "^1.95.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "@vscode/test-electron": "^2.2.0",
+    "@vscode/vsce": "3.2.1",
     "eslint": "^8.28.0",
     "glob": "^8.0.3",
     "mocha": "^10.1.0",

@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import * as vscode from "vscode";
+
 // For any given file return a list of possible matches
 export function getRelated(file: string): string[] {
 	if (isSpec(file)) {
@@ -38,6 +41,7 @@ function switchToSpecDir(file: string): string[] {
 	} else if (file.includes("/lib/")) {
 		return [
 			file.replace("/lib/", "/spec/lib/"),
+			file.replace(/\/lib\/.*\//, '/spec/'),
 		];
 	} else {
 		return [];
@@ -45,6 +49,7 @@ function switchToSpecDir(file: string): string[] {
 }
 
 function switchToCodeDir(file: string): string[] {
+	console.log("switchToCodeDir:" + file);
 	if (file.includes("/spec/config/initializers/")) {
 		return [
 			file.replace("/spec/", "/"),
@@ -59,10 +64,32 @@ function switchToCodeDir(file: string): string[] {
 			file.replace("/spec/requests/", "/app/controllers/"),
 		];
 	} else {
-		return [
-			file.replace("/spec/", "/app/"),
-		];
+		let files = [file.replace("/spec/", "/app/")];
+		const projectRoots = vscode.workspace.workspaceFolders?.map(folder => folder.uri.path);
+		if(projectRoots) {
+			projectRoots.forEach(projectRoot => {
+				listDirs(projectRoot).forEach(dir => {
+					files.push(file.replace('/spec/', dir.replace(projectRoot, "")));
+				});
+			});
+		}
+		return files;
 	}
+}
+
+function listDirs(dir: string): string[] {
+	let dirs: string[] = [];
+	fs.readdirSync(dir, { withFileTypes: true }).forEach(dirent => {
+		if(dirent.isDirectory()) {
+			let dist = `${dir}/${dirent.name}`;
+			dirs.push(`${dist}/`);
+			listDirs(dist).forEach(d => {
+				dirs.push(d);
+			});
+		}
+	});
+
+	return dirs;
 }
 
 function isViewFile(file: string): boolean {

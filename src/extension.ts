@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as resolver from "./resolver";
 import * as fs from "fs";
 import * as path from "path";
-import * as mkdirp from "mkdirp";
+import { mkdirp } from "mkdirp";
 
 function openFile(fileName: string) {
     vscode.workspace
@@ -65,12 +65,12 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
-    console.log("Congratulations, your extension 'rails-go-to-spec-v3' is now active!");
+    console.log("Congratulations, your extension 'rails-go-to-spec-vg' is now active!");
 
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with registerCommand
     // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand("rails-go-to-spec-v3.railsGoToSpec", () => {
+    let disposable = vscode.commands.registerCommand("rails-go-to-spec-vg.railsGoToSpec", () => {
         // Display a message box to the user
         var editor = vscode.window.activeTextEditor;
         if (!editor) {
@@ -102,7 +102,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         if (!fileFound) {
-            let first = related[0];
+            let first = related[1];
             if (first != null) {
                 openPrompt(first);
             }
